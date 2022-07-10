@@ -1,0 +1,5 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	C:\Users\lab419_oh\Desktop\git\FPGA_Tutorial\ch4_sd\ch4_sd.sdk\system_wrapper_hw_platform_0\system_wrapper.bit
+}
