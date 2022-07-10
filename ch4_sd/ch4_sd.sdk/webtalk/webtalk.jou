@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# 
+# Start of session at: Sun Jul 10 21:20:39 2022
+# Process ID: 1208
+# Current directory: C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_sd/ch4_sd.sdk/webtalk
+# Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
+# Log file: C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_sd/ch4_sd.sdk/webtalk/webtalk.log
+# Journal file: C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_sd/ch4_sd.sdk/webtalk\webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl
