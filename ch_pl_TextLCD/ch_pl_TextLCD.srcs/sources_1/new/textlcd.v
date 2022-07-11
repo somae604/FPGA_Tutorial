@@ -111,7 +111,7 @@ output lcd_data;
 
 wire lcd_rs;
 wire lcd_rw;
-wire lcd_en;
+// wire lcd_en;
 wire [7:0] lcd_data; 
 
 wire [31:0] reg_a;
@@ -143,13 +143,146 @@ wire [4:0] mode_actcm = 12;
 
 reg[9:0] set_data; 
 
+//assign reg_a = {`lcd_r, `lcd_p, `lcd_s, `lcd_dash};
+//assign reg_b = {`lcd_z, `lcd_7, `lcd_0, `lcd_2};
+//assign reg_c = {`lcd_0, `lcd_dash, `lcd_t, `lcd_k};
+//assign reg_d = {`lcd_black, `lcd_b, `lcd_d, `lcd_Dot};
+//assign reg_e = {`lcd_h, `lcd_s_u, `lcd_s_i, `lcd_s_n};
+//assign reg_f = {`lcd_s_s, `lcd_black, `lcd_c, `lcd_s_o};
+//assign reg_g = {`lcd_Dot, `lcd_comma, `lcd_black, `lcd_s_l};
+//assign reg_h = {`lcd_s_t, `lcd_s_d, `lcd_Dot, `lcd_black};
+
+assign reg_a = {`lcd_black, `lcd_black, `lcd_black, `lcd_black};
+assign reg_b = {`lcd_black, `lcd_black, `lcd_r, `lcd_e};
+assign reg_c = {`lcd_c, `lcd_s, `lcd_black, `lcd_black};
+assign reg_d = {`lcd_black, `lcd_black, `lcd_black, `lcd_black};
+assign reg_e = {`lcd_black, `lcd_black, `lcd_black, `lcd_black};
+assign reg_f = {`lcd_black, `lcd_black, `lcd_0, `lcd_4};
+assign reg_g = {`lcd_1, `lcd_9, `lcd_black, `lcd_black};
+assign reg_h = {`lcd_black, `lcd_black, `lcd_black, `lcd_black};
 
 
 
+always @(posedge lcdclk) 
+begin
+    if(resetn == 0)
+    begin
+        delay_lcdclk <= 0; 
+        count_lcd <= 0; 
+        lcd_en <= 1'b0; 
+    end
+    else
+    begin 
+    // count 2000
+        if(delay_lcdclk < 1999) 
+            delay_lcdclk <= delay_lcdclk + 1 ;
+        else
+            delay_lcdclk <= 0;
+    //count 40 
+        if(delay_lcdclk == 0 ) 
+        begin
+            if(count_lcd < 40 ) 
+                count_lcd <= count_lcd + 1 ;
+            else
+                count_lcd <= 6;
+        end 
+        if(delay_lcdclk == 200) 
+            lcd_en <= 1'b1; 
+        else if(delay_lcdclk == 1800) 
+            lcd_en <= 1'b0;
+    end
+end
+            
+always @(posedge lcdclk)
+begin 
+    if(resetn == 0)
+        lcd_mode <= mode_pwron; 
+    else
+        begin 
+            case(count_lcd) 
+                0 :  lcd_mode <= mode_pwron;
+                1 :  lcd_mode <= mode_fnset;
+                2 :  lcd_mode <= mode_onoff;
+                3 :  lcd_mode <= mode_entr1;
+                4 :  lcd_mode <= mode_entr2;
+                5 :  lcd_mode <= mode_entr3;
+                6 :  lcd_mode <= mode_seta1;
+                7 :  lcd_mode <= mode_wr1st;
+                23 : lcd_mode <= mode_seta2;
+                24 : lcd_mode <= mode_wr2nd;
+                40 : lcd_mode <= mode_delay;
+                41 : lcd_mode <= mode_actcm;
+                default : begin end
+            endcase
+        end
+end
 
+assign lcd_rs = set_data[9];
+assign lcd_rw = set_data[8];
+assign lcd_data = set_data[7:0]; 
 
-
-
-
+always @(lcdclk or lcd_mode or count_lcd) 
+begin               
+    if(resetn == 0) 
+        set_data = 10'b0000000000;
+    else
+        begin
+        case(lcd_mode) 
+            mode_pwron : set_data = {2'b00, 8'h38};
+            mode_fnset : set_data = {2'b00, 8'h38};
+            mode_onoff : set_data = {2'b00, 8'h0e};
+            mode_entr1 : set_data = {2'b00, 8'h06};
+            mode_entr2 : set_data = {2'b00, 8'h02};
+            mode_entr3 : set_data = {2'b00, 8'h01};
+            mode_seta1 : set_data = {2'b00, 8'h80}; 
+            mode_wr1st :
+                begin
+                case(count_lcd) 
+                    7 : set_data = {1'b1, 1'b0, reg_a[31:24]};
+                    8 : set_data = {1'b1, 1'b0, reg_a[23:16]};
+                    9 : set_data = {1'b1, 1'b0, reg_a[15:8]};
+                    10 : set_data = {1'b1, 1'b0, reg_a[7:0]};
+                    11 : set_data = {1'b1, 1'b0, reg_b[31:24]};
+                    12 : set_data = {1'b1, 1'b0, reg_b[23:16]};
+                    13 : set_data = {1'b1, 1'b0, reg_b[15:8]};
+                    14 : set_data = {1'b1, 1'b0, reg_b[7:0]};
+                    15 : set_data = {1'b1, 1'b0, reg_c[31:24]};
+                    16 : set_data = {1'b1, 1'b0, reg_c[23:16]};
+                    17 : set_data = {1'b1, 1'b0, reg_c[15:8]};
+                    18 : set_data = {1'b1, 1'b0, reg_c[7:0]};
+                    19 : set_data = {1'b1, 1'b0, reg_d[31:24]};
+                    20 : set_data = {1'b1, 1'b0, reg_d[23:16]};
+                    21 : set_data = {1'b1, 1'b0, reg_d[15:8]};
+                    22 : set_data = {1'b1, 1'b0, reg_d[7:0]};
+                endcase 
+                end 
+            mode_seta2 : set_data = {2'b00, 8'hc0};
+            mode_wr2nd :
+                begin 
+                case(count_lcd)
+                    24 : set_data = {1'b1, 1'b0, reg_e[31:24]};
+                    25 : set_data = {1'b1, 1'b0, reg_e[23:16]};
+                    26 : set_data = {1'b1, 1'b0, reg_e[15:8]};
+                    27 : set_data = {1'b1, 1'b0, reg_e[7:0]};
+                    28 : set_data = {1'b1, 1'b0, reg_f[31:24]};
+                    29 : set_data = {1'b1, 1'b0, reg_f[23:16]};
+                    30 : set_data = {1'b1, 1'b0, reg_f[15:8]};
+                    31 : set_data = {1'b1, 1'b0, reg_f[7:0]};
+                    32 : set_data = {1'b1, 1'b0, reg_g[31:24]};
+                    33 : set_data = {1'b1, 1'b0, reg_g[23:16]};
+                    34 : set_data = {1'b1, 1'b0, reg_g[15:8]};
+                    35 : set_data = {1'b1, 1'b0, reg_g[7:0]};
+                    36 : set_data = {1'b1, 1'b0, reg_h[31:24]};
+                    37 : set_data = {1'b1, 1'b0, reg_h[23:16]};
+                    38 : set_data = {1'b1, 1'b0, reg_h[15:8]};
+                    39 : set_data = {1'b1, 1'b0, reg_h[7:0]};
+                endcase
+                end
+            mode_delay : set_data = {2'b00, 8'h02};
+            mode_actcm : set_data = {2'b00, 8'h02};
+            default : begin end 
+        endcase
+        end                         
+end
 
 endmodule

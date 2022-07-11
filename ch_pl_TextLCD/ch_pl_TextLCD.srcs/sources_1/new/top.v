@@ -21,6 +21,14 @@
 
 
 module top(
-
+    input wire resetn,
+    input wire lcdclk,
+    output wire lcd_rs,
+    output wire lcd_rw,
+    output wire lcd_en,
+    output wire [7:0] lcd_data
     );
+
+textlcd utextlcd (.resetn(resetn), .lcdclk(lcdclk), .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_data(lcd_data));
+
 endmodule
