@@ -1,8 +1,7 @@
-21:19:58 **** Auto Build of configuration Release for project hello ****
-make pre-build main-build 
-a9-linaro-pre-build-step
+16:21:38 **** Clean-only build of configuration Release for project hello ****
+make clean 
+rm -rf  ./src/helloworld.o ./src/platform.o  ./src/helloworld.d ./src/platform.d  hello.elf.size  hello.elf
 ' '
-make: Nothing to be done for 'main-build'.
 
-21:19:59 Build Finished (took 222ms)
+16:21:39 Build Finished (took 165ms)
 

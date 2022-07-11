@@ -7,3 +7,20 @@
 21:19:55 INFO  : Invoking Bootgen: bootgen -image hello.bif -arch zynq -o C:\Users\lab419_oh\Desktop\git\FPGA_Tutorial\ch4_sd\ch4_sd.sdk\hello\bootimage\BOOT.bin
 21:19:55 INFO  : Creating new bif file C:\Users\lab419_oh\Desktop\git\FPGA_Tutorial\ch4_sd\ch4_sd.sdk\hello\bootimage\hello.bif
 21:19:56 INFO  : Bootgen command execution is done.
+16:21:09 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\lab419_oh\Desktop\git\FPGA_Tutorial\ch4_sd\ch4_sd.sdk\temp_xsdb_launch_script.tcl
+16:21:11 INFO  : XSCT server has started successfully.
+16:21:12 INFO  : Successfully done setting XSCT server connection channel  
+16:21:12 INFO  : Successfully done setting SDK workspace  
+16:21:15 INFO  : Registering command handlers for SDK TCF services
+16:21:15 INFO  : Processing command line option -hwspec C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_sd/ch4_sd.sdk/system_wrapper.hdf.
+16:21:16 INFO  : Checking for hwspec changes in the project system_wrapper_hw_platform_0.
+16:21:16 INFO  : SDK has detected change in the last modified timestamps for source hardware specification file Source:1657455881959,  Project:1657455070674
+16:21:16 INFO  : The hardware specification for project 'system_wrapper_hw_platform_0' is different from C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_sd/ch4_sd.sdk/system_wrapper.hdf.
+16:21:32 INFO  : Copied contents of C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_sd/ch4_sd.sdk/system_wrapper.hdf into \system_wrapper_hw_platform_0\system.hdf.
+16:21:36 INFO  : Synchronizing projects in the workspace with the hardware platform specification changes.
+16:21:37 INFO  : 
+16:21:37 INFO  : Updating hardware inferred compiler options for FSBL.
+16:21:37 INFO  : Updating hardware inferred compiler options for hello.
+16:21:37 INFO  : Clearing existing target manager status.
+16:21:37 INFO  : Workspace synchronized with the new hardware specification file. Cleaning dependent projects...
+16:21:39 WARN  : Linker script will not be updated automatically. Users need to update it manually.

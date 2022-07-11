@@ -2,28 +2,15 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Mon Jul 11 16:03:43 2022
-# Process ID: 29800
+# Start of session at: Mon Jul 11 16:24:34 2022
+# Process ID: 17360
 # Current directory: C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent25644 C:\Users\lab419_oh\Desktop\git\FPGA_Tutorial\ch4_ps\ch4_ps.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent26168 C:\Users\lab419_oh\Desktop\git\FPGA_Tutorial\ch4_ps\ch4_ps.xpr
 # Log file: C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/vivado.log
 # Journal file: C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps\vivado.jou
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.xpr
 update_compile_order -fileset sources_1
-launch_runs impl_1 -to_step write_bitstream -jobs 3
-wait_on_run impl_1
-open_hw
-connect_hw_server -url localhost:3121
-current_hw_target [get_hw_targets */xilinx_tcf/Digilent/210249AE991E]
-set_property PARAM.FREQUENCY 10000000 [get_hw_targets */xilinx_tcf/Digilent/210249AE991E]
-open_hw_target
-set_property PROGRAM.FILE {C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.runs/impl_1/system_wrapper.bit} [get_hw_devices xc7z020_1]
-current_hw_device [get_hw_devices xc7z020_1]
-refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7z020_1] 0]
-close_hw
-file mkdir C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.sdk
-file copy -force C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.runs/impl_1/system_wrapper.sysdef C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.sdk/system_wrapper.hdf
-
-launch_sdk -workspace C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.sdk -hwspec C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.sdk/system_wrapper.hdf
+/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.sdk -hwspec C:/Users/lab419_oh/Desktop/git/FPGA_Tutorial/ch4_ps/ch4_ps.sdk/system_wrapper.hdf
+update_compile_order -fileset sources_1
